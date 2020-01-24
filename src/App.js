@@ -1,9 +1,21 @@
-import React from 'react'
+import React, { useState } from 'react'
 
-function App() {
+import NewTask from './components/NewTask'
+
+import { Container } from '@material-ui/core'
+
+export default function App() {
+  const [tasks, setTasks] = useState([])
+
+  const handleAddNewTask = task => {
+    setTasks([...tasks, task])
+  }
+
   return (
-    <div>First</div>
+    <Container>
+      <h1>Tarefas</h1>
+      <NewTask addNewTask={handleAddNewTask} />
+      {tasks.map(task => task)}
+    </Container>
   )
 }
-
-export default App
