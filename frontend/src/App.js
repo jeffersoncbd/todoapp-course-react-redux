@@ -20,7 +20,23 @@ export default function App() {
   }
 
   const handleMarkAsDone = id => {
-    
+    const task = tasks.find(task => task._id === id)
+    const newTasks = tasks.map(task => {
+      if (task._id === id) {
+        task.done = !task.done
+      }
+      return task
+    })
+    setTasks(newTasks)
+    api.put(`/tasks/${id}`, { done: task.done }).catch(error => {
+      const oldTasks = tasks.map(task => {
+        if (task._id === id) {
+          task.done = !task.done
+        }
+        return task
+      })
+      setTasks(oldTasks)
+    })
   }
 
   const handleDeleteTask = id => {

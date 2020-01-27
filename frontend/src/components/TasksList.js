@@ -15,6 +15,10 @@ import { makeStyles } from '@material-ui/core/styles'
 const useStyles = makeStyles({
   root: {
     backgroundColor: '#FFFFFF'
+  },
+  done: {
+    color: '#CCCCCC',
+    textDecoration: 'line-through'
   }
 })
 
@@ -37,11 +41,16 @@ export default function TasksList(props) {
                 checked={task.done}
                 tabIndex={-1}
                 disableRipple
+                color="primary"
                 inputProps={{ 'aria-labelledby': task._id }}
                 onClick={() => props.markAsDone(task._id)}
               />
             </ListItemIcon>
-            <ListItemText id={task._id} primary={task.description} />
+            <ListItemText
+              id={task._id}
+              primary={task.description}
+              className={task.done ? classes.done : ''}
+            />
             <ListItemSecondaryAction>
               <IconButton
                 edge="end"
