@@ -10,9 +10,9 @@ export default function App() {
   const [tasks, setTasks] = useState([])
 
   const handleAddNewTask = description => {
-    setTasks([...tasks, { _id: 'temp', description, done: false }])
+    setTasks([{ _id: 'temp', description, done: false }, ...tasks])
     api.post('/tasks', { description }).then(response => {
-      setTasks([...tasks, response.data])
+      setTasks([response.data, ...tasks])
     })
   }
 
