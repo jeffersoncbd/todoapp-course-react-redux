@@ -25,6 +25,18 @@ export default function NewTask(props) {
     setNewTask('')
   }
 
+  const handleKeyUp = event => {
+    const keys = {
+      Escape: () => {
+        setNewTask('')
+      }
+    }
+    const keyFunction = keys[event.key]
+    if (keyFunction !== undefined) {
+      keyFunction()
+    }
+  }
+
   return (
     <Paper className={classes.root} component="form" onSubmit={handleSubmit}>
       <InputBase
@@ -33,6 +45,7 @@ export default function NewTask(props) {
         placeholder="Adicionar tarefa"
         inputProps={{ 'aria-label': 'adicionar tarefa' }}
         onChange={event => setNewTask(event.target.value)}
+        onKeyUp={handleKeyUp}
       />
       <IconButton type="submit" aria-label="search">
         <Add />
