@@ -57,9 +57,8 @@ export default function App() {
   return (
     <Container>
       <h1>Tarefas</h1>
-      <NewTask addNewTask={handleAddNewTask} />
+      <NewTask />
       <TasksList
-        tasks={tasks}
         markAsDone={handleMarkAsDone}
         deleteTask={handleDeleteTask}
       />

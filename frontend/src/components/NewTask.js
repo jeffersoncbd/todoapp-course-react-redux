@@ -1,4 +1,8 @@
-import React, { useState } from 'react'
+import React from 'react'
+
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { updateNewTask, addNewTask } from '../redux/actions'
 
 import { Paper, IconButton, InputBase } from '@material-ui/core'
 import { Add } from '@material-ui/icons'
@@ -14,21 +18,22 @@ const useStyles = makeStyles({
   }
 })
 
-export default function NewTask(props) {
-  const classes = useStyles()
+const mapStateToProps = state => ({ newTask: state.newTask })
+const mapDispatchToProps = dispatch => bindActionCreators({ updateNewTask, addNewTask }, dispatch)
 
-  const [newTask, setNewTask] = useState('')
+const NewTask = props => {
+  const classes = useStyles()
 
   const handleSubmit = event => {
     event.preventDefault()
-    props.addNewTask(newTask)
-    setNewTask('')
+    props.addNewTask(props.newTask)
+    props.updateNewTask('')
   }
 
   const handleKeyUp = event => {
     const keys = {
       Escape: () => {
-        setNewTask('')
+        props.updateNewTask('')
       }
     }
     const keyFunction = keys[event.key]
@@ -40,11 +45,11 @@ export default function NewTask(props) {
   return (
     <Paper className={classes.root} component="form" onSubmit={handleSubmit}>
       <InputBase
-        value={newTask}
+        value={props.newTask}
         className={classes.input}
         placeholder="Adicionar tarefa"
         inputProps={{ 'aria-label': 'adicionar tarefa' }}
-        onChange={event => setNewTask(event.target.value)}
+        onChange={props.updateNewTask}
         onKeyUp={handleKeyUp}
       />
       <IconButton type="submit" aria-label="search">
@@ -53,3 +58,5 @@ export default function NewTask(props) {
     </Paper>
   )
 }
+
+export default connect(mapStateToProps, mapDispatchToProps)(NewTask)

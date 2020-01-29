@@ -1,4 +1,5 @@
 import React from 'react'
+import { connect } from 'react-redux'
 
 import {
   List,
@@ -22,7 +23,9 @@ const useStyles = makeStyles({
   }
 })
 
-export default function TasksList(props) {
+const mapStateToProps = state => ({ tasks: state.tasksList })
+
+const TasksList = props => {
   const classes = useStyles()
 
   return (
@@ -66,3 +69,5 @@ export default function TasksList(props) {
     </List>
   )
 }
+
+export default connect(mapStateToProps)(TasksList)
