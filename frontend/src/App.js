@@ -1,12 +1,18 @@
 import React, { useState, useEffect } from 'react'
 import api from './services/api'
 
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import { setTasks } from './redux/actions'
+
 import NewTask from './components/NewTask'
 import TasksList from './components/TasksList'
 
 import { Container } from '@material-ui/core'
 
-export default function App() {
+const mapDispatchToProps = dispatch => bindActionCreators({ setTasks }, dispatch)
+
+const App = props => {
   const [tasks, setTasks] = useState([])
 
   const handleAddNewTask = description => {
@@ -50,7 +56,7 @@ export default function App() {
 
   useEffect(() => {
     api.get('/tasks?sort=-createdAt').then(response => {
-      setTasks(response.data)
+      props.setTasks(response.data)
     })
   }, [])
 
@@ -65,3 +71,5 @@ export default function App() {
     </Container>
   )
 }
+
+export default connect(null, mapDispatchToProps)(App)
