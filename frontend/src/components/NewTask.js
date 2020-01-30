@@ -2,7 +2,7 @@ import React from 'react'
 
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { updateNewTask, addNewTask } from '../redux/actions'
+import { renameNewTask, addNewTask } from '../redux/actions'
 
 import { Paper, IconButton, InputBase } from '@material-ui/core'
 import { Add } from '@material-ui/icons'
@@ -19,7 +19,7 @@ const useStyles = makeStyles({
 })
 
 const mapStateToProps = state => ({ newTask: state.newTask, tasks: state.tasksList })
-const mapDispatchToProps = dispatch => bindActionCreators({ updateNewTask, addNewTask }, dispatch)
+const mapDispatchToProps = dispatch => bindActionCreators({ renameNewTask, addNewTask }, dispatch)
 
 const NewTask = props => {
   const classes = useStyles()
@@ -27,13 +27,13 @@ const NewTask = props => {
   const handleSubmit = event => {
     event.preventDefault()
     props.addNewTask(props.newTask, props.tasks)
-    props.updateNewTask('')
+    props.renameNewTask('')
   }
 
   const handleKeyUp = event => {
     const keys = {
       Escape: () => {
-        props.updateNewTask('')
+        props.renameNewTask('')
       }
     }
     const keyFunction = keys[event.key]
@@ -49,7 +49,7 @@ const NewTask = props => {
         className={classes.input}
         placeholder="Adicionar tarefa"
         inputProps={{ 'aria-label': 'adicionar tarefa' }}
-        onChange={props.updateNewTask}
+        onChange={props.renameNewTask}
         onKeyUp={handleKeyUp}
       />
       <IconButton type="submit" aria-label="search">

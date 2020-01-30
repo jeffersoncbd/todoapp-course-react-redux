@@ -12,7 +12,7 @@ export const setTasks = () => {
   }
 }
 
-export const updateNewTask = event => ({
+export const renameNewTask = event => ({
   type: 'RENAME_NEW_TASK',
   payload: event.target === undefined ? event : event.target.value
 })
@@ -44,6 +44,22 @@ export const addNewTask = (taskDescription, oldTasks) => {
             }
           })
         }
+      })
+  }
+}
+
+export const deleteTask = (_id, oldTasks) => {
+  return dispatchEvent => {
+    dispatchEvent({
+      type: 'DELETE_TASK',
+      payload: _id
+    })
+    api.delete(`/tasks/${_id}`)
+      .catch(() => {
+        dispatchEvent({
+          type: 'SET_TASKS',
+          payload: oldTasks
+        })
       })
   }
 }

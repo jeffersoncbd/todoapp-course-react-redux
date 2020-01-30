@@ -1,5 +1,7 @@
 import React from 'react'
+import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+import { deleteTask } from '../redux/actions'
 
 import {
   List,
@@ -24,6 +26,7 @@ const useStyles = makeStyles({
 })
 
 const mapStateToProps = state => ({ tasks: state.tasksList })
+const mapDispatchToProps = dispatch => bindActionCreators({ deleteTask }, dispatch)
 
 const TasksList = props => {
   const classes = useStyles()
@@ -58,7 +61,7 @@ const TasksList = props => {
               <IconButton
                 edge="end"
                 aria-label="delete"
-                onClick={() => props.deleteTask(task._id)}
+                onClick={() => props.deleteTask(task._id, props.tasks)}
               >
                 <DeleteForever />
               </IconButton>
@@ -70,4 +73,4 @@ const TasksList = props => {
   )
 }
 
-export default connect(mapStateToProps)(TasksList)
+export default connect(mapStateToProps, mapDispatchToProps)(TasksList)

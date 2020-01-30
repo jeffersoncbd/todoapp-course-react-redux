@@ -35,15 +35,6 @@ const App = props => {
     })
   }
 
-  const handleDeleteTask = id => {
-    const oldTasks = tasks
-    const remainingTasks = tasks.filter(task => task._id !== id)
-    setTasks(remainingTasks)
-    api.delete(`/tasks/${id}`).catch(error => {
-      setTasks(oldTasks)
-    })
-  }
-
   useEffect(() => {
     props.setTasks()
   })
@@ -54,7 +45,6 @@ const App = props => {
       <NewTask />
       <TasksList
         markAsDone={handleMarkAsDone}
-        deleteTask={handleDeleteTask}
       />
     </Container>
   )

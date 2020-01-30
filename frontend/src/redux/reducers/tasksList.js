@@ -10,7 +10,11 @@ export default (state = [], action) => {
     UPDATE_NEW_TASK: () => [
       action.payload.newTask,
       ...action.payload.oldTasks
-    ]
+    ],
+
+    DELETE_TASK: () => {
+      return state.filter(task => task._id !== action.payload)
+    }
   }
 
   const possibleAction = possibleActions[action.type]
