@@ -12,6 +12,15 @@ export default (state = [], action) => {
       ...action.payload.oldTasks
     ],
 
+    MARK_AS_DONE: () => {
+      return state.map(task => {
+        if (task._id === action.payload) {
+          task.done = !task.done
+        }
+        return task
+      })
+    },
+
     DELETE_TASK: () => {
       return state.filter(task => task._id !== action.payload)
     }

@@ -36,7 +36,6 @@ export const addNewTask = (taskDescription, oldTasks) => {
       })
       .then(response => {
         if (response !== undefined) {
-          console.log(response.data)
           dispatch({
             type: 'UPDATE_NEW_TASK',
             payload: {
@@ -55,6 +54,22 @@ export const deleteTask = (_id, oldTasks) => {
       payload: _id
     })
     api.delete(`/tasks/${_id}`)
+      .catch(() => {
+        dispatchEvent({
+          type: 'SET_TASKS',
+          payload: oldTasks
+        })
+      })
+  }
+}
+
+export const markAsDone = (task, oldTasks) => {
+  return dispatchEvent => {
+    dispatchEvent({
+      type: 'MARK_AS_DONE',
+      payload: task._id
+    })
+    api.put(`/tasks/${task._id}`, { done: task.done })
       .catch(() => {
         dispatchEvent({
           type: 'SET_TASKS',

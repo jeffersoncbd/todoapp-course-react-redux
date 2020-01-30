@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react'
-import api from './services/api'
+import React, { useEffect } from 'react'
 
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
@@ -13,28 +12,6 @@ import { Container } from '@material-ui/core'
 const mapDispatchToProps = dispatch => bindActionCreators({ setTasks }, dispatch)
 
 const App = props => {
-  const [tasks, setTasks] = useState([])
-
-  const handleMarkAsDone = id => {
-    const task = tasks.find(task => task._id === id)
-    const newTasks = tasks.map(task => {
-      if (task._id === id) {
-        task.done = !task.done
-      }
-      return task
-    })
-    setTasks(newTasks)
-    api.put(`/tasks/${id}`, { done: task.done }).catch(error => {
-      const oldTasks = tasks.map(task => {
-        if (task._id === id) {
-          task.done = !task.done
-        }
-        return task
-      })
-      setTasks(oldTasks)
-    })
-  }
-
   useEffect(() => {
     props.setTasks()
   })
@@ -43,9 +20,7 @@ const App = props => {
     <Container>
       <h1>Tarefas</h1>
       <NewTask />
-      <TasksList
-        markAsDone={handleMarkAsDone}
-      />
+      <TasksList />
     </Container>
   )
 }

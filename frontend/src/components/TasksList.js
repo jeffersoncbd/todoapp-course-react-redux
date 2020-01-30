@@ -1,7 +1,7 @@
 import React from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { deleteTask } from '../redux/actions'
+import { markAsDone, deleteTask } from '../redux/actions'
 
 import {
   List,
@@ -26,7 +26,7 @@ const useStyles = makeStyles({
 })
 
 const mapStateToProps = state => ({ tasks: state.tasksList })
-const mapDispatchToProps = dispatch => bindActionCreators({ deleteTask }, dispatch)
+const mapDispatchToProps = dispatch => bindActionCreators({ markAsDone, deleteTask }, dispatch)
 
 const TasksList = props => {
   const classes = useStyles()
@@ -49,7 +49,7 @@ const TasksList = props => {
                 disableRipple
                 color="primary"
                 inputProps={{ 'aria-labelledby': task._id }}
-                onClick={() => props.markAsDone(task._id)}
+                onClick={() => props.markAsDone(task, props.tasks)}
               />
             </ListItemIcon>
             <ListItemText
