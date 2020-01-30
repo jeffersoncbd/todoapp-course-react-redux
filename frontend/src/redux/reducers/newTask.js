@@ -1,6 +1,6 @@
 export default (state = '', action) => {
   const possibleActions = {
-    UPDATE_NEW_TASK: () => action.payload
+    RENAME_NEW_TASK: () => action.payload
   }
 
   const possibleAction = possibleActions[action.type]

@@ -15,16 +15,6 @@ const mapDispatchToProps = dispatch => bindActionCreators({ setTasks }, dispatch
 const App = props => {
   const [tasks, setTasks] = useState([])
 
-  const handleAddNewTask = description => {
-    const oldTasks = tasks
-    setTasks([{ _id: 'temp', description, done: false }, ...tasks])
-    api.post('/tasks', { description }).then(response => {
-      setTasks([response.data, ...tasks])
-    }).catch(error => {
-      setTasks(oldTasks)
-    })
-  }
-
   const handleMarkAsDone = id => {
     const task = tasks.find(task => task._id === id)
     const newTasks = tasks.map(task => {
@@ -55,10 +45,8 @@ const App = props => {
   }
 
   useEffect(() => {
-    api.get('/tasks?sort=-createdAt').then(response => {
-      props.setTasks(response.data)
-    })
-  }, [])
+    props.setTasks()
+  })
 
   return (
     <Container>

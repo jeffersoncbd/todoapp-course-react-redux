@@ -18,7 +18,7 @@ const useStyles = makeStyles({
   }
 })
 
-const mapStateToProps = state => ({ newTask: state.newTask })
+const mapStateToProps = state => ({ newTask: state.newTask, tasks: state.tasksList })
 const mapDispatchToProps = dispatch => bindActionCreators({ updateNewTask, addNewTask }, dispatch)
 
 const NewTask = props => {
@@ -26,7 +26,7 @@ const NewTask = props => {
 
   const handleSubmit = event => {
     event.preventDefault()
-    props.addNewTask(props.newTask)
+    props.addNewTask(props.newTask, props.tasks)
     props.updateNewTask('')
   }
 

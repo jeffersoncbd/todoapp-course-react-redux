@@ -3,12 +3,13 @@ export default (state = [], action) => {
     SET_TASKS: () => action.payload,
 
     ADD_NEW_TASK: () => [
-      {
-        _id: new Date(),
-        description: action.payload,
-        done: false
-      },
+      action.payload,
       ...state
+    ],
+
+    UPDATE_NEW_TASK: () => [
+      action.payload.newTask,
+      ...action.payload.oldTasks
     ]
   }
 
