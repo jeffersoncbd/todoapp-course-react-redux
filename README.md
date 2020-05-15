@@ -8,10 +8,11 @@ Este aplicativo foi criado seguindo os passos [deste curso](https://www.udemy.co
 O meu objetivo com ele era aprender os conceitos básicos de [Redux](https://redux.js.org/), mas resolvi implementar ReactHooks (que não estão no curso) e no final acabou se tornando um belo app feito com [Material-ui](https://material-ui.com/).
 
 ## Como testar
-Primeiro copie o arquivo .env.example (que está dentro de backend) renomeando para .env.
-Edite o arquivo adicionando a porta de sua escolha e os dados de acesso à um banco mongodb (recomendo o [MongoDB Atlas](https://cloud.mongodb.com/user#/atlas/login)), e já pode executar "yarn dev" no backend.
-
-A edite o arquivo "frontend/src/services/api.js" adicionando a URL do backend e poderá fazer o "yarn start" do frontend.
+1. Execute `yarn` dentro das pastas: backend e frontend
+2. Copie o arquivo .env.example (que está dentro de backend) renomeando para .env e adicione as informações necessárias no novo arquivo (a porta de sua escolha e os dados de acesso à um banco mongodb - recomendo o [MongoDB Atlas](https://cloud.mongodb.com/user#/atlas/login))
+3. Execute `yarn dev` na pasta backend e deixe rodando.
+4. Edite o arquivo `frontend/src/services/api.js` adicionando a URL do backend.
+5. Execute `yarn start` na pasta frontend.
 
 ## Package.json
 ### Backend
